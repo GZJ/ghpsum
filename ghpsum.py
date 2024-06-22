@@ -23,7 +23,7 @@ def get_repositories(username, filter_fork, filter_github_io):
         repo_name = repo['name']
         repo_url = repo['html_url']
         repo_description = repo['description'] if repo['description'] else 'No description'
-        repo_data.append({'Repository Name': repo_name, 'URL': repo_url, 'Description': repo_description})
+        repo_data.append({'Name': repo_name, 'URL': repo_url, 'Description': repo_description})
 
     return repo_data
 
@@ -37,7 +37,7 @@ def generate_html_table(data, output_file):
         <h1>GitHub Repositories</h1>
         <table border="1">
             <tr>
-                <th>Repository Name</th>
+                <th>Name</th>
                 <th>Description</th>
             </tr>
             $table_rows
@@ -55,7 +55,7 @@ def generate_html_table(data, output_file):
 
     table_rows = ""
     for repo in data:
-        table_rows += row_template.substitute(repo_name=repo['Repository Name'], repo_url=repo['URL'], repo_description=repo['Description'])
+        table_rows += row_template.substitute(repo_name=repo['Name'], repo_url=repo['URL'], repo_description=repo['Description'])
 
     html_content = table_template.substitute(table_rows=table_rows)
 
